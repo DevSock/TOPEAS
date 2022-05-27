@@ -40,7 +40,7 @@ function registerCol(col) {
   // Add the column to the colList
   colList.push(col);
   // Add the event listener to the column
-  col.addEventListener("", function () {
+  col.addEventListener("mouseover", function () {
     //TODO: Handle mouseover event depending on the current mode
     switch (currentMode) {
       case "erase":
@@ -52,6 +52,8 @@ function registerCol(col) {
       case "color":
         break;
       default:
+        col.style.backgroundColor = "#000";
+        console.log("default case");
         break;
     }
   });
