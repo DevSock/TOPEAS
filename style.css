@@ -45,28 +45,26 @@ header h1 {
 .row {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   flex: 1;
-  justify-content: space-around;
 }
 
 .col {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   flex: 1;
-  justify-content: space-around;
 }
 
-.modes {
+.modes,
+.actions {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 
 .color,
-.mode {
+.mode,
+.action {
   height: 100px;
   cursor: pointer;
   transition: 0.1s;
@@ -83,7 +81,8 @@ header h1 {
   border: none;
 }
 
-.mode {
+.mode,
+.action {
   width: 300px;
   background-color: #e1b5be;
   color: #641f2d;
@@ -94,6 +93,7 @@ header h1 {
 }
 
 .mode:hover,
-.color:hover {
+.color:hover,
+.action:hover {
   transform: scale(1.05);
 }
