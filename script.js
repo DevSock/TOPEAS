@@ -2,6 +2,15 @@ const grid = document.querySelector(".grid");
 let colList = [];
 let currentMode = "draw";
 
+// Populate the grid with the specified density
+function populateGrid(density) {
+  // Clear the grid
+  grid.innerHTML = "";
+  colList = [];
+  // Create the rows
+  createRows(grid, density);
+}
+
 // Populate the grid with rows equal to the specified density
 function createRows(grid, density) {
   for (let i = 0; i < density; i++) {
