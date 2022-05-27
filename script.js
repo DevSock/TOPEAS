@@ -40,23 +40,25 @@ function registerCol(col) {
   // Add the column to the colList
   colList.push(col);
   // Add the event listener to the column
-  col.addEventListener("mouseover", function () {
-    //TODO: Handle mouseover event depending on the current mode
-    switch (currentMode) {
-      case "erase":
-        break;
-      case "shade":
-        break;
-      case "rainbow":
-        break;
-      case "color":
-        break;
-      default:
-        col.style.backgroundColor = "#000";
-        console.log("default case");
-        break;
-    }
-  });
+  col.addEventListener("mouseover", () => draw(col, currentMode));
+}
+
+// Apply styles depending on the current mode to the given column
+function draw(col, mode) {
+  //TODO: Handle mouseover event depending on the current mode
+  switch (mode) {
+    case "erase":
+      break;
+    case "shade":
+      break;
+    case "rainbow":
+      break;
+    case "color":
+      break;
+    default:
+      col.style.backgroundColor = "#000";
+      break;
+  }
 }
 
 populateGrid(16);
