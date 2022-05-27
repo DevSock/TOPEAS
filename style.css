@@ -96,4 +96,12 @@ header h1 {
 .color:hover,
 .action:hover {
   transform: scale(1.05);
+  box-shadow: 0px 4px 6px;
+}
+
+.mode:active,
+.color:active,
+.action:active {
+  box-shadow: 0px 0px 3px;
+  transform: scale(1);
 }
