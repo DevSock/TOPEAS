@@ -56,3 +56,5 @@ function registerCol(col) {
     }
   });
 }
+
+populateGrid(16);
