@@ -1,32 +1,43 @@
 * {
   /* border: 1px solid red; */
+  font-family: "Roboto", sans-serif;
   margin: 0;
   padding: 0;
 }
 
+body {
+  height: 100vh;
+  background-color: #b97f8a;
+}
+
 main {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  height: 100vh;
+  padding: 50px;
+  gap: 100px;
 }
 
 .container {
   margin: 0 100px;
-  display: flex;
-  justify-content: center;
+}
+
+header h1 {
+  text-align: center;
+  font-size: 50px;
+  color: #641f2d;
 }
 
 .etcher {
-  border: 2px solid black;
   display: flex;
   padding: 20px;
+  background-color: #e1b5be;
+  box-shadow: 0px 2px 3px;
+  border-radius: 5px;
 }
 
 .grid {
-  width: 800px;
-  height: 800px;
+  width: 650px;
+  height: 650px;
   display: flex;
   flex-direction: column;
 }
@@ -45,4 +56,44 @@ main {
   flex-wrap: wrap;
   flex: 1;
   justify-content: space-around;
+}
+
+.modes {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.color,
+.mode {
+  height: 100px;
+  cursor: pointer;
+  transition: 0.1s;
+  border: none;
+  outline: none;
+}
+
+.color {
+  width: 100px;
+  box-shadow: 0px 2px 3px;
+}
+::-webkit-color-swatch,
+::-moz-color-swatch {
+  border: none;
+}
+
+.mode {
+  width: 300px;
+  background-color: #e1b5be;
+  color: #641f2d;
+  font-size: 40px;
+  font-weight: bold;
+  border-radius: 5px;
+  box-shadow: 0px 2px 3px;
+}
+
+.mode:hover,
+.color:hover {
+  transform: scale(1.05);
 }
