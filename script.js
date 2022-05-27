@@ -2,6 +2,18 @@ const grid = document.querySelector(".grid");
 let colList = [];
 let currentMode = "draw";
 
+// Populate the grid with rows equal to the specified density
+function createRows(grid, density) {
+  for (let i = 0; i < density; i++) {
+    const row = document.createElement("div");
+    row.classList.add("row");
+    // Create and append columns to the row
+    createCols(row, density);
+    // Append the row to the grid
+    grid.appendChild(row);
+  }
+}
+
 // Populate the given row with columns equal to the specified density
 function createCols(row, density) {
   for (let j = 0; j < density; j++) {
