@@ -1,4 +1,5 @@
 const grid = document.querySelector(".grid");
+const colorElement = document.querySelector(".color");
 let colList = [];
 let currentMode = "draw";
 
@@ -59,6 +60,18 @@ function draw(col, mode) {
       col.style.backgroundColor = "#000";
       break;
   }
+}
+
+function fillGrid() {
+  colList.forEach((col) => (col.style.backgroundColor = colorElement.value));
+}
+
+function toggleGrid() {
+  colList.forEach((col) => col.classList.toggle("border"));
+}
+
+function clearGrid() {
+  colList.forEach((col) => (col.style.backgroundColor = ""));
 }
 
 populateGrid(16);

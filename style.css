@@ -98,3 +98,7 @@ header h1 {
   box-shadow: 0px 0px 3px;
   transform: scale(1);
 }
+
+.border {
+  border: 1px dotted #641f2d;
+}
