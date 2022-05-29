@@ -63,7 +63,7 @@ function draw(col, mode) {
   }
 }
 
-const erase = (col) => (col.style.backgroundColor = "transparent");
+const erase = (col) => (col.style.backgroundColor = "");
 const color = (col) => (col.style.backgroundColor = currentColor);
 const rainbow = (col) => (col.style.backgroundColor = randomColor());
 
@@ -93,7 +93,13 @@ function randomColor() {
 
 //Fill the grid with the current selected color.
 function fillGrid() {
-  colList.forEach((col) => (col.style.backgroundColor = currentColor));
+  const confirmed = confirm("Are you sure you want to fill the entire grid?");
+  if (!confirmed) return;
+  colList.forEach((col) => {
+    if (col.style.backgroundColor == "") {
+      col.style.backgroundColor = currentColor;
+    }
+  });
 }
 
 //Toggle the grid outline
@@ -103,10 +109,20 @@ function toggleGrid() {
 
 //Wipe the grid clean
 function clearGrid() {
+  const confirmed = confirm("Are you sure you want to clear the entire grid?");
+  if (!confirmed) return;
   colList.forEach((col) => {
     col.style.backgroundColor = "";
     col.style.filter = "";
   });
+}
+
+function resetGrid() {
+  const confirmed = confirm(
+    "Are you sure you want to reset the grid to default?"
+  );
+  if (!confirmed) return;
+  populateGrid(16);
 }
 
 colorElement.addEventListener("change", (e) => (currentColor = e.target.value));
