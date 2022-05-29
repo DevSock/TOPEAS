@@ -38,7 +38,7 @@ function createCols(row, density) {
 function registerCol(col) {
   colList.push(col);
   col.addEventListener("mouseover", () => draw(col, currentMode));
-  col.addEventListener("click", () => draw(col, mode));
+  col.addEventListener("click", () => draw(col, currentMode));
 }
 
 // Apply styles to the given column depending upon the current mode
