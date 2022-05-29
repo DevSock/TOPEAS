@@ -3,6 +3,7 @@ const colorElement = document.querySelector(".color");
 let colList = [];
 let currentMode = "draw";
 let currentColor = colorElement.value;
+let isClicking = false;
 
 const setCurrentMode = (mode) => (currentMode = mode);
 
@@ -41,6 +42,7 @@ function registerCol(col) {
 
 // Apply styles to the given column depending upon the current mode
 function draw(col, mode) {
+  if (!isClicking) return;
   if (mode != "shade") col.style.filter = "";
   switch (mode) {
     case "erase":
@@ -105,6 +107,8 @@ function clearGrid() {
 }
 
 colorElement.addEventListener("change", (e) => (currentColor = e.target.value));
+document.addEventListener("mousedown", () => (isClicking = true));
+document.addEventListener("mouseup", () => (isClicking = false));
 
 setCurrentMode("draw");
 populateGrid(16);
