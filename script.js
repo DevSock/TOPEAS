@@ -37,13 +37,15 @@ function createCols(row, density) {
 // Add the given column to the list of columns and register its event listeners
 function registerCol(col) {
   colList.push(col);
-  col.addEventListener("mouseover", () => draw(col, currentMode));
-  col.addEventListener("click", () => draw(col, mode));
+  col.addEventListener("mouseover", () => {
+    if (!isClicking) return;
+    draw(col, currentMode);
+  });
+  col.addEventListener("mousedown", () => draw(col, currentMode));
 }
 
 // Apply styles to the given column depending upon the current mode
 function draw(col, mode) {
-  if (!isClicking) return;
   if (mode != "shade") col.style.filter = "";
   switch (mode) {
     case "erase":
