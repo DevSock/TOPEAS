@@ -22,10 +22,10 @@
         <main>
             <form class="modes" action="" method="">
                 <input class="color" type="color" value="#641f2d">
-                <button type="button" class="mode">Draw</button>
-                <button type="button" class="mode">Rainbow</button>
-                <button type="button" class="mode">Eraser</button>
-                <button type="button" class="mode">Shade</button>
+                <button type="button" class="mode" onclick="setCurrentMode('draw')">Draw</button>
+                <button type="button" class="mode" onclick="setCurrentMode('rainbow')">Rainbow</button>
+                <button type="button" class="mode" onclick="setCurrentMode('erase')">Erase</button>
+                <button type="button" class="mode" onclick="setCurrentMode('shade')">Shade</button>
             </form>
             <div class="etcher">
                 <div class="grid"></div>
