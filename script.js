@@ -2,13 +2,14 @@ const grid = document.querySelector(".grid");
 const colorElement = document.querySelector(".color");
 let colList = [];
 let currentMode = "draw";
+let currentColor = colorElement.value;
+
+const setCurrentMode = (mode) => (currentMode = mode);
 
 // Populate the grid with the specified density
 function populateGrid(density) {
-  // Clear the grid
   grid.innerHTML = "";
   colList = [];
-  // Create the rows
   createRows(grid, density);
 }
 
@@ -17,9 +18,7 @@ function createRows(grid, density) {
   for (let i = 0; i < density; i++) {
     const row = document.createElement("div");
     row.classList.add("row");
-    // Create and append columns to the row
     createCols(row, density);
-    // Append the row to the grid
     grid.appendChild(row);
   }
 }
@@ -29,49 +28,83 @@ function createCols(row, density) {
   for (let j = 0; j < density; j++) {
     const col = document.createElement("div");
     col.classList.add("col");
-    // Append the column to the row
     row.appendChild(col);
-    // Register the column
     registerCol(col);
   }
 }
 
 // Add the given column to the list of columns and register its event listeners
 function registerCol(col) {
-  // Add the column to the colList
   colList.push(col);
-  // Add the event listener to the column
   col.addEventListener("mouseover", () => draw(col, currentMode));
 }
 
-// Apply styles depending on the current mode to the given column
+// Apply styles to the given column depending upon the current mode
 function draw(col, mode) {
-  //TODO: Handle mouseover event depending on the current mode
+  if (mode != "shade") col.style.filter = "";
   switch (mode) {
     case "erase":
+      erase(col);
       break;
     case "shade":
+      shade(col);
       break;
     case "rainbow":
-      break;
-    case "color":
+      rainbow(col);
       break;
     default:
-      col.style.backgroundColor = "#000";
+      color(col);
       break;
   }
 }
 
-function fillGrid() {
-  colList.forEach((col) => (col.style.backgroundColor = colorElement.value));
+const erase = (col) => (col.style.backgroundColor = "transparent");
+const color = (col) => (col.style.backgroundColor = currentColor);
+const rainbow = (col) => (col.style.backgroundColor = randomColor());
+
+//Reduce the brightness of a column by 10% per function call
+function shade(col) {
+  const shade = col.style.filter;
+  if (shade == "") {
+    col.style.filter = "brightness(0.9)";
+  } else {
+    if (shade <= 0) return;
+    //Replace all non-numerical digits with empty space
+    //(ex: "brightness(0.9)" becomes "09")
+    //Javascript drops the 0, then we subtract 1 to subtract 10% of the brightness.
+    const newShade = +shade.replace(/\D/g, "") - 1;
+    col.style.filter = `brightness(0.${newShade})`;
+  }
 }
 
+//Generate a random RGB value using Math.random
+function randomColor() {
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
+//Fill the grid with the current selected color.
+function fillGrid() {
+  colList.forEach((col) => (col.style.backgroundColor = currentColor));
+}
+
+//Toggle the grid outline
 function toggleGrid() {
   colList.forEach((col) => col.classList.toggle("border"));
 }
 
+//Wipe the grid clean
 function clearGrid() {
-  colList.forEach((col) => (col.style.backgroundColor = ""));
+  colList.forEach((col) => {
+    col.style.backgroundColor = "";
+    col.style.filter = "";
+  });
 }
 
+colorElement.addEventListener("change", (e) => (currentColor = e.target.value));
+
+setCurrentMode("draw");
 populateGrid(16);
