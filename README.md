@@ -1,7 +1,8 @@
 # TOPEAS
 
-<font size="5"><b>The Odin Project Fundamentals Etch-A-Sketch Project</b></font>
-<font size="5"><b>Sketch your own pixel art sized up to 96px x 96px</b></font>
+<font size="5"><b>The Odin Project Fundamentals Etch-A-Sketch Project<br>Sketch your own pixel art sized up to 96px x 96px</b></font>
+
+<font size="5"><b><a href="https://trello.com/b/Rgb7qgg7/topeas">Public Trello Board</a></b></font>
 
 <img src="EtchASketch_Gecko.png" alt="Gecko pixel art" width="800"/>
 
