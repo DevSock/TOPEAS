@@ -104,7 +104,7 @@ function fillGrid() {
 
 //Toggle the grid outline
 function toggleGrid() {
-  colList.forEach((col) => col.classList.toggle("border"));
+  colList.forEach((col) => col.classList.toggle("boxShade"));
 }
 
 //Wipe the grid clean
