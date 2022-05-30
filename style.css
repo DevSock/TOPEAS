@@ -54,7 +54,7 @@ header p {
   overflow: hidden;
   user-select: none;
   border: 1px solid #748ba7;
-  box-shadow: 2px 2px 3px #000 inset;
+  box-shadow: 0px 2px 3px #000 inset;
 }
 
 .row {
