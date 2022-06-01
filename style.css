@@ -9,3 +9,59 @@ body {
   display: flex;
   min-height: 100vh;
 }
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  gap: 20px;
+  flex: 1;
+}
+
+/* ############################# */
+/* ############################# */
+
+#optionsbar {
+  display: flex;
+  width: 300px;
+  overflow: hidden;
+  transition: width 0.5s ease-in-out;
+}
+
+#optionsbar h1:first-of-type() {
+  margin-bottom: 20px;
+}
+
+#optionsbar h1,
+#optionsbar p {
+  text-align: center;
+  width: 100%;
+}
+
+#color {
+  display: flex;
+  justify-content: center;
+}
+
+.option-group {
+  display: flex;
+  width: 100%;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+#size {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#size input {
+  width: 100%;
+}
+
+.width-300 {
+  width: 300px;
+}
