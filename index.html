@@ -20,40 +20,41 @@
             <header class="optionsbar_header">
                 <h1 class="optionsbar_header_h1">Tools</h1>
             </header>
-            <main></main>
             <div class="color">
                 <input class="color-swatch" type="color" value="#641f2d">
             </div>
             <div class="modes">
+                <h1 class="modes-title">Drawing Tools</h1>
                 <button type="button" class="mode">Draw</button>
                 <button type="button" class="mode">Rainbow</button>
                 <button type="button" class="mode">Erase</button>
                 <button type="button" class="mode">Shade</button>
             </div>
             <div class="actions">
+                <h1 class="actions-title">Grid Tools</h1>
                 <button type="button" class="action">Clear</button>
                 <button type="button" class="action">Fill</button>
                 <button type="button" class="action">Grid</button>
                 <button type="button" class="action">Reset</button>
             </div>
             <div class="sizes">
-                <p class="sizes-title">Grid Size</p>
+                <h1 class="sizes-title">Grid Size</h1>
                 <input class="size" type="range" min="2" max="100" value="16">
                 <p class="size-value">16x16</p>
             </div>
         </div>
     </section>
-    <section class="container">
-        <header>
-            <h1>TOP Etch-A-Sketch Project</h1>
-            <p>Click and drag to draw!</p>
-        </header>
-        <main>
-            <div class="etcher">
+    <main class="sketchzone">
+        <div class="container">
+            <header>
+                <h1>TOP Etch-A-Sketch Project</h1>
+                <p>Click and drag to draw!</p>
+            </header>
+            <section class="etcher">
                 <div class="grid"></div>
-            </div>
-        </main>
-    </section>
+            </section>
+        </div>
+    </main>
 </body>
 
 <script src="script.js"></script>
