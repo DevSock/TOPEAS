@@ -102,6 +102,7 @@ body {
 
 #sketchzone .container {
   gap: 0;
+  padding: 20px;
 }
 
 #sketchzone header {
