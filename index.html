@@ -15,38 +15,39 @@
 </head>
 
 <body>
-    <div class="container">
+    <section class="optionsbar">
+        <div class="container">
+            <div class="color">
+                <input class="color" type="color" value="#641f2d">
+            </div>
+            <div class="modes">
+                <button type="button" class="mode">Draw</button>
+                <button type="button" class="mode">Rainbow</button>
+                <button type="button" class="mode">Erase</button>
+                <button type="button" class="mode">Shade</button>
+            </div>
+            <div class="actions">
+                <button type="button" class="action">Clear</button>
+                <button type="button" class="action">Fill</button>
+                <button type="button" class="action">Grid</button>
+                <button type="button" class="action">Reset</button>
+            </div>
+            <div class="sizes">
+                <input class="size" type="range" min="2" max="100" value="16">
+            </div>
+        </div>
+    </section>
+    <section class="container">
         <header>
             <h1>TOP Etch-A-Sketch Project</h1>
             <p>Click and drag to draw!</p>
         </header>
         <main>
-            <form class="modes" action="" method="">
-                <input class="color" type="color" value="#641f2d">
-                <button type="button" class="mode" onclick="setCurrentMode('draw')">Draw</button>
-                <button type="button" class="mode" onclick="setCurrentMode('rainbow')">Rainbow</button>
-                <button type="button" class="mode" onclick="setCurrentMode('erase')">Erase</button>
-                <button type="button" class="mode" onclick="setCurrentMode('shade')">Shade</button>
-            </form>
             <div class="etcher">
                 <div class="grid"></div>
-                <div class="sizes">
-                    <button class="size" onclick="populateGrid(16)">16x16</button>
-                    <button class="size" onclick="populateGrid(32)">32x32</button>
-                    <button class="size" onclick="populateGrid(48)">48x48</button>
-                    <button class="size" onclick="populateGrid(64)">64x64</button>
-                    <button class="size" onclick="populateGrid(80)">80x80</button>
-                    <button class="size" onclick="populateGrid(96)">96x96</button>
-                </div>
             </div>
-            <form class="actions" action="" method="">
-                <button type="button" class="action" onclick="clearGrid()">Clear</button>
-                <button type="button" class="action" onclick="fillGrid()">Fill</button>
-                <button type="button" class="action" onclick="toggleGrid()">Grid</button>
-                <button type="button" class="action" onclick="resetGrid()">Reset</button>
-            </form>
         </main>
-    </div>
+    </section>
 </body>
 
 <script src="script.js"></script>
