@@ -15,25 +15,23 @@
 <body>
     <section id="optionsbar">
         <div class="container">
-            <div id="color">
+            <div id="pen_tools" class="option-group">
+                <h2 class="options-heading">Pen Tools</h2>
                 <input type="color" value="#641f2d">
-            </div>
-            <div class="option-group">
-                <h2>Drawing Tools</h2>
                 <button type="button" class="mode">Draw</button>
                 <button type="button" class="mode">Rainbow</button>
                 <button type="button" class="mode">Erase</button>
                 <button type="button" class="mode">Shade</button>
             </div>
-            <div class="option-group">
-                <h2>Grid Tools</h2>
+            <div id="grid_tools" class="option-group">
+                <h2 class="options-heading">Grid Tools</h2>
                 <button type="button" class="action">Clear</button>
                 <button type="button" class="action">Fill</button>
                 <button type="button" class="action">Grid</button>
                 <button type="button" class="action">Reset</button>
             </div>
-            <div id="size">
-                <h2>Grid Size</h2>
+            <div id="size_tools" class="option-group">
+                <h2 class="options-heading">Grid Size</h2>
                 <input type="range" min="2" max="100" value="16">
                 <p>16x16</p>
             </div>
@@ -50,8 +48,8 @@
                 <h1>TOP Etch-A-Sketch Project</h1>
                 <p>Click and drag to draw!</p>
             </header>
-            <section id="etcher">
-                <div></div>
+            <section>
+                <div id="grid"></div>
             </section>
         </div>
     </main>
