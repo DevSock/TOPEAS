@@ -78,6 +78,7 @@ p {
   justify-content: center;
   width: 30px;
   background-color: #faead6;
+  overflow: hidden;
 }
 
 #options-handle div {
@@ -88,7 +89,7 @@ p {
   height: 20rem;
   border-radius: 0 5px 5px 0;
   background-color: #8a97a0;
-  box-shadow: 1px 0px 4px -1px #000;
+  box-shadow: -5px 0px 5px 0px #000;
   border: 1px solid hsl(205, 10%, 48%);
 }
 
