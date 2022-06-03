@@ -39,7 +39,7 @@ p {
 
 #optionsbar .container {
   justify-content: space-around;
-  gap: 20px;
+  gap: 15px;
 }
 
 .options-heading {
@@ -83,13 +83,14 @@ input[type="color"] {
   font-size: 20px;
   font-weight: bold;
   opacity: 0.7;
-  transition: opacity 0.2s, transform 0.2s;
+  transition: opacity, transform, color, all 0.2s;
   cursor: pointer;
 }
 
 .option-button:hover {
   opacity: 1;
   transform: scale(1.1);
+  color: #589a7a;
 }
 
 #size_tools {
