@@ -42,7 +42,7 @@ p {
 }
 
 .options-heading {
-  color: #faead6;
+  color: #fffefc;
   font-size: 26px;
   border-bottom: 1px solid #6e7c87;
 }
@@ -78,9 +78,16 @@ input[type="color"] {
   background-color: #faead6;
   border: 1px solid #6e7c87;
   border-radius: 5px;
-  color: #6e7c87;
+  color: #54778d;
   font-size: 20px;
   font-weight: bold;
+  opacity: 0.7;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.option-button:hover {
+  opacity: 1;
+  transform: scale(1.1);
 }
 
 #size_tools {
@@ -90,7 +97,40 @@ input[type="color"] {
 #size_tools p {
   font-size: 20px;
   font-weight: bold;
-  color: #faead6;
+  color: #fffefc;
+}
+
+#size_tools input[type="range"] {
+  -webkit-appearance: none; /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 15px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
+  transition: opacity 0.2s;
+}
+
+#size_tools input[type="range"]:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+#size_tools input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 20px; /* Set a specific slider handle width */
+  height: 20px; /* Slider handle height */
+  background: #fffefc; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+#size_tools input[type="range"]::-moz-range-thumb {
+  width: 20px; /* Set a specific slider handle width */
+  height: 20px; /* Slider handle height */
+  background: #fffefc; /* Green background */
+  cursor: pointer; /* Cursor on hover */
 }
 
 .width-300 {
@@ -125,7 +165,7 @@ input[type="color"] {
 #options-handle p {
   writing-mode: vertical-lr;
   text-orientation: upright;
-  color: #faead6;
+  color: #fffefc;
   font-size: 26px;
   padding-top: 1em; /* This padding fixes the weird text offset from it's orientation.*/
   border-radius: 0 10px 10px 0;
@@ -155,6 +195,7 @@ input[type="color"] {
   justify-content: center;
   flex: 1;
   text-align: center;
+  color: #54778d;
 }
 
 #sketchzone section {
