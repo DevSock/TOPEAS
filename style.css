@@ -84,7 +84,6 @@ input[type="color"] {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
   background-color: #faead6;
   overflow: hidden;
 }
@@ -93,7 +92,7 @@ input[type="color"] {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 50px;
   height: 20rem;
   border-radius: 0 5px 5px 0;
   background-color: #8a97a0;
@@ -104,6 +103,9 @@ input[type="color"] {
 #options-handle p {
   writing-mode: vertical-lr;
   text-orientation: upright;
+  color: #faead6;
+  font-size: 26px;
+  padding-top: 1em; /* This padding fixes the weird text offset from it's orientation.*/
 }
 
 /* ############################# */
