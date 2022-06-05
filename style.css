@@ -177,7 +177,7 @@ input[type="color"] {
   color: #fffefc;
   font-size: 26px;
   font-weight: bold;
-  padding-top: 1em; /* This padding fixes the weird text offset from it's orientation.*/
+  padding-top: 0.7rem;
   border-radius: 0 10px 10px 0;
   border: 1px solid hsl(205, 10%, 48%);
   box-shadow: inset -1px 0px 4px -2px #000;
@@ -197,15 +197,17 @@ input[type="color"] {
 
 #sketchzone .container {
   padding: 20px;
+  flex: 0;
 }
 
 #sketchzone header {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  flex: 1;
   text-align: center;
-  color: #54778d;
+  color: #faead6;
+  background-color: #6e7c87;
+  border-radius: 10px 10px 0 0;
 }
 
 #sketchzone section {
@@ -215,6 +217,8 @@ input[type="color"] {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #dfd0bd;
+  border-radius: 0 0 5px 5px;
 }
 
 #grid {
