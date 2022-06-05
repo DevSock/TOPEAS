@@ -186,7 +186,7 @@ input[type="color"] {
 /* ############################# */
 /* ############################# */
 
-#sketchzone {
+main {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -195,22 +195,22 @@ input[type="color"] {
   background-color: #faead6;
 }
 
-#sketchzone .container {
-  padding: 20px;
+main .container {
   flex: 0;
 }
 
-#sketchzone header {
+main header {
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
   color: #faead6;
   background-color: #6e7c87;
+  border: 1px solid #6e7c87;
   border-radius: 10px 10px 0 0;
 }
 
-#sketchzone section {
+main section {
   display: flex;
   width: 45rem;
   height: 45rem;
@@ -218,6 +218,7 @@ input[type="color"] {
   justify-content: center;
   align-items: center;
   background-color: #dfd0bd;
+  border: 1px solid #6e7c87;
   border-radius: 0 0 5px 5px;
 }
 
