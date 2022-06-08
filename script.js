@@ -1,9 +1,13 @@
 const optionsHandle = document.querySelector("#options-handle div");
 const optionsBar = document.querySelector("#options-bar");
 const optionsBarPin = document.getElementById("pin");
+const optionsBarPinPath = optionsBarPin.querySelector("path");
 const main = document.getElementById("main");
 
+let isPinned = false;
+
 function expandBar() {
+  if (isPinned) return;
   optionsBar.classList.remove("shrunk");
   optionsBar.classList.add("expanded");
   optionsBarPin.classList.add("shown");
@@ -11,14 +15,27 @@ function expandBar() {
 }
 
 function shrinkBar() {
+  if (isPinned) return;
   optionsBar.classList.remove("expanded");
   optionsBar.classList.add("shrunk");
   optionsBarPin.classList.remove("shown");
   optionsBarPin.classList.add("hidden");
 }
 
+function pinBar() {
+  if (!optionsBar.classList.contains("expanded")) return;
+  if (isPinned) {
+    isPinned = false;
+    optionsBarPinPath.style.fill = "red";
+    return;
+  }
+  isPinned = true;
+  optionsBarPinPath.style.fill = "limegreen";
+}
+
 optionsHandle.addEventListener("mouseover", expandBar);
 main.addEventListener("mouseover", shrinkBar);
+optionsBarPin.addEventListener("click", pinBar);
 
 ////////////////////////////////////////////////////////
 // const grid = document.querySelector(".grid");
