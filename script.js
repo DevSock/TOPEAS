@@ -6,7 +6,7 @@ const main = document.getElementById("main");
 const grid = document.getElementById("grid");
 const color = document.getElementById("color");
 const drawButtons = document.querySelectorAll("#draw-tools .option-button");
-const gridToggle = document.getElementById("grid-toggle");
+const gridButtons = document.querySelectorAll("#grid-tools .option-button");
 
 let isPinned = false;
 let currentDrawTool = "pen";
@@ -97,17 +97,31 @@ function useShade(pixel) {
   }
 }
 
-function toggleGrid() {
+function modifyGrid(target) {
+  switch (target.textContent.toLowerCase()) {
+    case "clear":
+      break;
+    case "fill":
+      break;
+    case "grid":
+      toggleGrid(target);
+      break;
+    case "reset":
+      break;
+  }
+}
+
+function toggleGrid(target) {
   if (gridEnabled) {
     grid.childNodes.forEach((pixel) => {
       pixel.classList.remove("shade-bordered");
-      gridToggle.classList.remove("active-button");
+      target.classList.remove("active-button");
     });
     gridEnabled = false;
   } else {
     grid.childNodes.forEach((pixel) => {
       pixel.classList.add("shade-bordered");
-      gridToggle.classList.add("active-button");
+      target.classList.add("active-button");
     });
     gridEnabled = true;
   }
@@ -118,8 +132,6 @@ populateGrid(16);
 optionsHandle.addEventListener("mouseover", expandBar);
 main.addEventListener("mouseover", shrinkBar);
 optionsBarPin.addEventListener("click", pinBar);
-
-gridToggle.addEventListener("click", toggleGrid);
 
 document.addEventListener("mousedown", () => (isClicking = true));
 document.addEventListener("mouseup", () => (isClicking = false));
@@ -137,6 +149,12 @@ drawButtons.forEach((button) => {
       button.classList.remove("active-button");
     });
     e.target.classList.add("active-button");
+  });
+});
+
+gridButtons.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    modifyGrid(e.target);
   });
 });
 
