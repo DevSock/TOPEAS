@@ -52,11 +52,20 @@ function drawPixel(pixel) {
     case "pen":
       usePen(pixel);
       break;
+    case "rainbow":
+      useRainbow(pixel);
+      break;
   }
 }
 
 function usePen(pixel) {
   pixel.style.backgroundColor = color.value;
+}
+
+function useRainbow(pixel) {
+  pixel.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, ${
+    Math.random() * 40 + 30
+  }%)`;
 }
 
 populateGrid(16);
