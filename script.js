@@ -5,7 +5,7 @@ const optionsBarPinPath = optionsBarPin.querySelector("path");
 const main = document.getElementById("main");
 const grid = document.getElementById("grid");
 const color = document.getElementById("color");
-const optionButtons = document.querySelectorAll(".option-button");
+const drawButtons = document.querySelectorAll("#draw-tools .option-button");
 
 let isPinned = false;
 let currentDrawTool = "pen";
@@ -109,9 +109,13 @@ grid.childNodes.forEach((pixel) => {
   });
 });
 
-optionButtons.forEach((button) => {
+drawButtons.forEach((button) => {
   button.addEventListener("click", (e) => {
     currentDrawTool = e.target.textContent.toLowerCase();
+    drawButtons.forEach((button) => {
+      button.classList.remove("active-button");
+    });
+    e.target.classList.add("active-button");
   });
 });
 
