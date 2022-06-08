@@ -5,6 +5,7 @@ const optionsBarPinPath = optionsBarPin.querySelector("path");
 const main = document.getElementById("main");
 const grid = document.getElementById("grid");
 const color = document.getElementById("color");
+const optionButtons = document.querySelectorAll(".option-button");
 
 let isPinned = false;
 let currentDrawTool = "pen";
@@ -48,6 +49,8 @@ function populateGrid(size) {
 function drawPixel(pixel) {
   if (!isClicking) return;
 
+  if (currentDrawTool !== "shade") pixel.style.filter = "";
+
   switch (currentDrawTool) {
     case "pen":
       usePen(pixel);
@@ -75,18 +78,18 @@ function useRainbow(pixel) {
 }
 
 function useErase(pixel) {
-  pixel.style.backgroundColor = "transparent";
+  pixel.style.backgroundColor = "";
 }
 
 function useShade(pixel) {
   const shade = pixel.style.filter;
+  if (pixel.style.backgroundColor === "") return;
+  if (shade === "brightness(0)") return;
+
   if (shade == "") {
     pixel.style.filter = "brightness(0.9)";
+    return;
   } else {
-    if (+shade <= 0) return;
-    //Replace all non-numerical digits with empty space
-    //(ex: "brightness(0.9)" becomes "09")
-    //Javascript drops the 0, then we subtract 1 to subtract 10% of the brightness.
     const newShade = +shade.replace(/\D/g, "") - 1;
     pixel.style.filter = `brightness(0.${newShade})`;
   }
@@ -103,6 +106,12 @@ document.addEventListener("mouseup", () => (isClicking = false));
 grid.childNodes.forEach((pixel) => {
   pixel.addEventListener("mouseover", (e) => {
     drawPixel(e.target);
+  });
+});
+
+optionButtons.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    currentDrawTool = e.target.textContent.toLowerCase();
   });
 });
 
