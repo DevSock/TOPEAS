@@ -48,8 +48,8 @@ function populateGrid(size) {
   }
 }
 
-function drawPixel(pixel) {
-  if (!isClicking) return;
+function drawPixel(pixel, force) {
+  if (!isClicking && !force) return;
 
   if (currentDrawTool !== "shade") pixel.style.filter = "";
 
@@ -103,6 +103,7 @@ function modifyGrid(target) {
       clearGrid();
       break;
     case "fill":
+      fillGrid();
       break;
     case "grid":
       toggleGrid(target);
@@ -118,6 +119,15 @@ function clearGrid() {
   grid.childNodes.forEach((pixel) => {
     pixel.style.backgroundColor = "";
     pixel.style.filter = "";
+  });
+}
+
+function fillGrid() {
+  if (!confirm("Are you sure you want to fill the grid?")) return;
+
+  grid.childNodes.forEach((pixel) => {
+    console.log("drawing");
+    drawPixel(pixel, true);
   });
 }
 
@@ -148,7 +158,7 @@ document.addEventListener("mouseup", () => (isClicking = false));
 
 grid.childNodes.forEach((pixel) => {
   pixel.addEventListener("mouseover", (e) => {
-    drawPixel(e.target);
+    drawPixel(e.target, false);
   });
 });
 
