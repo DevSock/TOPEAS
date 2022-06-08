@@ -132,7 +132,8 @@ function fillGrid() {
   if (!confirm("Are you sure you want to fill the grid?")) return;
 
   grid.childNodes.forEach((pixel) => {
-    console.log("drawing");
+    if (pixel.style.backgroundColor !== "" && currentDrawTool !== "shade")
+      return;
     drawPixel(pixel, true);
   });
 }
