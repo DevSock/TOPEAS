@@ -3,6 +3,7 @@ const optionsBar = document.querySelector("#options-bar");
 const optionsBarPin = document.getElementById("pin");
 const optionsBarPinPath = optionsBarPin.querySelector("path");
 const main = document.getElementById("main");
+const grid = document.getElementById("grid");
 
 let isPinned = false;
 
@@ -33,9 +34,19 @@ function pinBar() {
   optionsBarPinPath.style.fill = "limegreen";
 }
 
+function populateGrid(size) {
+  grid.innerHTML = "";
+  for (let i = 0; i < size ** 2; i++) {
+    const pixel = document.createElement("div");
+    grid.appendChild(pixel);
+  }
+}
+
 optionsHandle.addEventListener("mouseover", expandBar);
 main.addEventListener("mouseover", shrinkBar);
 optionsBarPin.addEventListener("click", pinBar);
+
+populateGrid(16);
 
 ////////////////////////////////////////////////////////
 // const grid = document.querySelector(".grid");
