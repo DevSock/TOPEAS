@@ -7,6 +7,8 @@ const grid = document.getElementById("grid");
 const color = document.getElementById("color");
 const drawButtons = document.querySelectorAll("#draw-tools .option-button");
 const gridButtons = document.querySelectorAll("#grid-tools .option-button");
+const sizeSlider = document.querySelector("#size-tools input");
+const sizeText = document.querySelector("#size-tools p");
 
 let isPinned = false;
 let currentDrawTool = "pen";
@@ -45,6 +47,9 @@ function populateGrid(size) {
   for (let i = 0; i < size ** 2; i++) {
     const pixel = document.createElement("div");
     grid.appendChild(pixel);
+    pixel.addEventListener("mouseover", (e) => {
+      drawPixel(e.target, false);
+    });
   }
 }
 
@@ -109,6 +114,7 @@ function modifyGrid(target) {
       toggleGrid(target);
       break;
     case "reset":
+      resetGrid();
       break;
   }
 }
@@ -147,6 +153,14 @@ function toggleGrid(target) {
   }
 }
 
+function resetGrid() {
+  if (!confirm("Are you sure you want to reset the grid?")) return;
+
+  sizeSlider.value = 16;
+  sizeText.textContent = `16\u00d716`;
+  populateGrid(16);
+}
+
 populateGrid(16);
 
 optionsHandle.addEventListener("mouseover", expandBar);
@@ -155,12 +169,6 @@ optionsBarPin.addEventListener("click", pinBar);
 
 document.addEventListener("mousedown", () => (isClicking = true));
 document.addEventListener("mouseup", () => (isClicking = false));
-
-grid.childNodes.forEach((pixel) => {
-  pixel.addEventListener("mouseover", (e) => {
-    drawPixel(e.target, false);
-  });
-});
 
 drawButtons.forEach((button) => {
   button.addEventListener("click", (e) => {
