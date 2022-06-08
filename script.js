@@ -100,6 +100,7 @@ function useShade(pixel) {
 function modifyGrid(target) {
   switch (target.textContent.toLowerCase()) {
     case "clear":
+      clearGrid();
       break;
     case "fill":
       break;
@@ -109,6 +110,15 @@ function modifyGrid(target) {
     case "reset":
       break;
   }
+}
+
+function clearGrid() {
+  if (!confirm("Are you sure you want to clear the grid?")) return;
+
+  grid.childNodes.forEach((pixel) => {
+    pixel.style.backgroundColor = "";
+    pixel.style.filter = "";
+  });
 }
 
 function toggleGrid(target) {
