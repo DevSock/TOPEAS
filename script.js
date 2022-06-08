@@ -55,6 +55,9 @@ function drawPixel(pixel) {
     case "rainbow":
       useRainbow(pixel);
       break;
+    case "erase":
+      useErase(pixel);
+      break;
   }
 }
 
@@ -66,6 +69,10 @@ function useRainbow(pixel) {
   pixel.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, ${
     Math.random() * 40 + 30
   }%)`;
+}
+
+function useErase(pixel) {
+  pixel.style.backgroundColor = "transparent";
 }
 
 populateGrid(16);
