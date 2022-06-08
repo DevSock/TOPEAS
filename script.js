@@ -47,10 +47,8 @@ function populateGrid(size) {
   for (let i = 0; i < size ** 2; i++) {
     const pixel = document.createElement("div");
     grid.appendChild(pixel);
-    pixel.addEventListener("mouseover", (e) => {
-      drawPixel(e.target, false);
-    });
   }
+  registerPixels(grid.childNodes);
 }
 
 function drawPixel(pixel, force) {
@@ -159,6 +157,8 @@ function resetGrid() {
 
   sizeSlider.value = 16;
   sizeText.textContent = `16\u00d716`;
+  gridButtons.forEach((button) => button.classList.remove("active-button"));
+  gridEnabled = false;
   populateGrid(16);
 }
 
@@ -187,6 +187,14 @@ gridButtons.forEach((button) => {
   });
 });
 
+function registerPixels(pixels) {
+  pixels.forEach((pixel) => {
+    pixel.addEventListener("click", () => drawPixel(pixel));
+    pixel.addEventListener("mouseover", (e) => {
+      drawPixel(e.target, false);
+    });
+  });
+}
 ////////////////////////////////////////////////////////
 // const grid = document.querySelector(".grid");
 // const colorElement = document.querySelector(".color");
