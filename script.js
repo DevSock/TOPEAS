@@ -4,8 +4,11 @@ const optionsBarPin = document.getElementById("pin");
 const optionsBarPinPath = optionsBarPin.querySelector("path");
 const main = document.getElementById("main");
 const grid = document.getElementById("grid");
+const color = document.getElementById("color");
 
 let isPinned = false;
+let currentDrawTool = "pen";
+let isClicking = false;
 
 function expandBar() {
   if (isPinned) return;
@@ -42,11 +45,33 @@ function populateGrid(size) {
   }
 }
 
+function drawPixel(pixel) {
+  if (!isClicking) return;
+
+  switch (currentDrawTool) {
+    case "pen":
+      usePen(pixel);
+      break;
+  }
+}
+
+function usePen(pixel) {
+  pixel.style.backgroundColor = color.value;
+}
+
+populateGrid(16);
+
 optionsHandle.addEventListener("mouseover", expandBar);
 main.addEventListener("mouseover", shrinkBar);
 optionsBarPin.addEventListener("click", pinBar);
+document.addEventListener("mousedown", () => (isClicking = true));
+document.addEventListener("mouseup", () => (isClicking = false));
 
-populateGrid(16);
+grid.childNodes.forEach((pixel) => {
+  pixel.addEventListener("mouseover", (e) => {
+    drawPixel(e.target);
+  });
+});
 
 ////////////////////////////////////////////////////////
 // const grid = document.querySelector(".grid");
