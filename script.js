@@ -189,7 +189,7 @@ gridButtons.forEach((button) => {
 
 function registerPixels(pixels) {
   pixels.forEach((pixel) => {
-    pixel.addEventListener("click", () => {
+    pixel.addEventListener("mousedown", () => {
       drawPixel(pixel, true);
     });
     pixel.addEventListener("mouseover", () => {
