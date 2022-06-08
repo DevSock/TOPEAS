@@ -58,6 +58,9 @@ function drawPixel(pixel) {
     case "erase":
       useErase(pixel);
       break;
+    case "shade":
+      useShade(pixel);
+      break;
   }
 }
 
@@ -73,6 +76,20 @@ function useRainbow(pixel) {
 
 function useErase(pixel) {
   pixel.style.backgroundColor = "transparent";
+}
+
+function useShade(pixel) {
+  const shade = pixel.style.filter;
+  if (shade == "") {
+    pixel.style.filter = "brightness(0.9)";
+  } else {
+    if (+shade <= 0) return;
+    //Replace all non-numerical digits with empty space
+    //(ex: "brightness(0.9)" becomes "09")
+    //Javascript drops the 0, then we subtract 1 to subtract 10% of the brightness.
+    const newShade = +shade.replace(/\D/g, "") - 1;
+    pixel.style.filter = `brightness(0.${newShade})`;
+  }
 }
 
 populateGrid(16);
