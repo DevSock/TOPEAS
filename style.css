@@ -245,6 +245,7 @@ main section {
   width: 80vh;
   height: 80vh;
   margin: 5px;
+  user-select: none;
 }
 /* ############################# */
 /* ############################# */
