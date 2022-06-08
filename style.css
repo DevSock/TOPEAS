@@ -58,7 +58,7 @@ input[type="color"] {
 
 #grid-tools .container,
 #size-tools .container,
-#pen-tools .container {
+#draw-tools .container {
   gap: 10px;
 }
 
