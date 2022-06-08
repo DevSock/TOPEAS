@@ -6,10 +6,12 @@ const main = document.getElementById("main");
 const grid = document.getElementById("grid");
 const color = document.getElementById("color");
 const drawButtons = document.querySelectorAll("#draw-tools .option-button");
+const gridToggle = document.getElementById("grid-toggle");
 
 let isPinned = false;
 let currentDrawTool = "pen";
 let isClicking = false;
+let gridEnabled = false;
 
 function expandBar() {
   if (isPinned) return;
@@ -95,11 +97,30 @@ function useShade(pixel) {
   }
 }
 
+function toggleGrid() {
+  if (gridEnabled) {
+    grid.childNodes.forEach((pixel) => {
+      pixel.classList.remove("shade-bordered");
+      gridToggle.classList.remove("active-button");
+    });
+    gridEnabled = false;
+  } else {
+    grid.childNodes.forEach((pixel) => {
+      pixel.classList.add("shade-bordered");
+      gridToggle.classList.add("active-button");
+    });
+    gridEnabled = true;
+  }
+}
+
 populateGrid(16);
 
 optionsHandle.addEventListener("mouseover", expandBar);
 main.addEventListener("mouseover", shrinkBar);
 optionsBarPin.addEventListener("click", pinBar);
+
+gridToggle.addEventListener("click", toggleGrid);
+
 document.addEventListener("mousedown", () => (isClicking = true));
 document.addEventListener("mouseup", () => (isClicking = false));
 
