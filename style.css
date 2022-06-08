@@ -57,9 +57,9 @@ input[type="color"] {
   cursor: pointer;
 }
 
-#grid_tools .container,
-#size_tools .container,
-#pen_tools .container {
+#grid-tools .container,
+#size-tools .container,
+#pen-tools .container {
   gap: 10px;
 }
 
@@ -98,17 +98,17 @@ input[type="color"] {
   color: hsl(151, 27%, 47%);
 }
 
-#size_tools {
+#size-tools {
   flex: 0;
 }
 
-#size_tools p {
+#size-tools p {
   font-size: 20px;
   font-weight: bold;
   color: hsl(40, 100%, 99%);
 }
 
-#size_tools input[type="range"] {
+#size-tools input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
@@ -121,12 +121,12 @@ input[type="color"] {
   cursor: pointer;
 }
 
-#size_tools input[type="range"]:hover {
+#size-tools input[type="range"]:hover {
   opacity: 1;
   transform: scale(1.1);
 }
 
-#size_tools input[type="range"]::-webkit-slider-thumb {
+#size-tools input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 20px;
@@ -135,7 +135,7 @@ input[type="color"] {
   cursor: pointer;
 }
 
-#size_tools input[type="range"]::-moz-range-thumb {
+#size-tools input[type="range"]::-moz-range-thumb {
   width: 20px;
   height: 20px;
   background: hsl(40, 100%, 99%);
