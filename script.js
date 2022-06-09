@@ -162,8 +162,6 @@ function resetGrid() {
   populateGrid(16);
 }
 
-populateGrid(16);
-
 optionsHandle.addEventListener("mouseover", expandBar);
 main.addEventListener("mouseover", shrinkBar);
 optionsBarPin.addEventListener("click", pinBar);
@@ -197,6 +195,10 @@ function registerPixels(pixels) {
     });
   });
 }
+
+window.onload = () => {
+  populateGrid(16);
+};
 ////////////////////////////////////////////////////////
 // const grid = document.querySelector(".grid");
 // const colorElement = document.querySelector(".color");
