@@ -1,19 +1,41 @@
-const optionsHandle = document.querySelector("#options-handle div");
-const optionsBar = document.querySelector("#options-bar");
+const optionsHandle = document.getElementById("options-handle");
+const optionsBar = document.getElementById("options-bar");
 const optionsBarPin = document.getElementById("pin");
 const optionsBarPinPath = optionsBarPin.querySelector("path");
-const main = document.getElementById("main");
-const grid = document.getElementById("grid");
 const color = document.getElementById("color");
+const sizeSlider = document.getElementById("size-slider");
+const sizeText = document.getElementById("size-text");
 const drawButtons = document.querySelectorAll("#draw-tools .option-button");
 const gridButtons = document.querySelectorAll("#grid-tools .option-button");
-const sizeSlider = document.querySelector("#size-tools input");
-const sizeText = document.querySelector("#size-tools p");
 
-let isPinned = false;
-let currentDrawTool = "pen";
-let isClicking = false;
-let gridEnabled = false;
+const main = document.getElementById("main");
+const grid = document.getElementById("grid");
+
+const DEFAULT_TOOL = "pen";
+const DEFAULT_SIZE = 16;
+let isExpanded, isPinned, currentTool, isClicking, isGridded, currentSize;
+
+window.onload = () => {
+  populateGrid(DEFAULT_SIZE);
+  currentTool = DEFAULT_TOOL;
+  currentSize = DEFAULT_SIZE;
+  isExpanded = 0;
+  isPinned = 0;
+  isClicking = 0;
+  isGridded = 0;
+};
+
+function populateGrid(size) {
+  grid.innerHTML = "";
+  for (let i = 0; i < size ** 2; i++) {
+    const pixel = document.createElement("div");
+    grid.appendChild(pixel);
+  }
+  registerPixels(grid.childNodes);
+}
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 
 function expandBar() {
   if (isPinned) return;
@@ -42,21 +64,15 @@ function pinBar() {
   optionsBarPinPath.style.fill = "limegreen";
 }
 
-function populateGrid(size) {
-  grid.innerHTML = "";
-  for (let i = 0; i < size ** 2; i++) {
-    const pixel = document.createElement("div");
-    grid.appendChild(pixel);
-  }
-  registerPixels(grid.childNodes);
-}
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 
 function drawPixel(pixel, force) {
   if (!isClicking && !force) return;
 
-  if (currentDrawTool !== "shade") pixel.style.filter = "";
+  if (currentTool !== "shade") pixel.style.filter = "";
 
-  switch (currentDrawTool) {
+  switch (currentTool) {
     case "pen":
       usePen(pixel);
       break;
@@ -100,6 +116,9 @@ function useShade(pixel) {
   }
 }
 
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
 function modifyGrid(target) {
   switch (target.textContent.toLowerCase()) {
     case "clear":
@@ -130,25 +149,24 @@ function fillGrid() {
   if (!confirm("Are you sure you want to fill the grid?")) return;
 
   grid.childNodes.forEach((pixel) => {
-    if (pixel.style.backgroundColor !== "" && currentDrawTool !== "shade")
-      return;
+    if (pixel.style.backgroundColor !== "" && currentTool !== "shade") return;
     drawPixel(pixel, true);
   });
 }
 
 function toggleGrid(target) {
-  if (gridEnabled) {
+  if (isGridded) {
     grid.childNodes.forEach((pixel) => {
       pixel.classList.remove("shade-bordered");
       target.classList.remove("active-button");
     });
-    gridEnabled = false;
+    isGridded--;
   } else {
     grid.childNodes.forEach((pixel) => {
       pixel.classList.add("shade-bordered");
       target.classList.add("active-button");
     });
-    gridEnabled = true;
+    isGridded++;
   }
 }
 
@@ -158,9 +176,12 @@ function resetGrid() {
   sizeSlider.value = 16;
   sizeText.textContent = `16\u00d716`;
   gridButtons.forEach((button) => button.classList.remove("active-button"));
-  gridEnabled = false;
+  if (isGridded) isGridded--;
   populateGrid(16);
 }
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 
 optionsHandle.addEventListener("mouseover", expandBar);
 main.addEventListener("mouseover", shrinkBar);
@@ -171,7 +192,7 @@ document.addEventListener("mouseup", () => (isClicking = false));
 
 drawButtons.forEach((button) => {
   button.addEventListener("click", (e) => {
-    currentDrawTool = e.target.textContent.toLowerCase();
+    currentTool = e.target.textContent.toLowerCase();
     drawButtons.forEach((button) => {
       button.classList.remove("active-button");
     });
@@ -195,10 +216,6 @@ function registerPixels(pixels) {
     });
   });
 }
-
-window.onload = () => {
-  populateGrid(16);
-};
 ////////////////////////////////////////////////////////
 // const grid = document.querySelector(".grid");
 // const colorElement = document.querySelector(".color");
