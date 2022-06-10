@@ -169,8 +169,7 @@ function clearGrid() {
   if (!confirm("Are you sure you want to clear the grid?")) return;
 
   grid.childNodes.forEach((pixel) => {
-    pixel.style.backgroundColor = "";
-    pixel.style.filter = "";
+    useErase(pixel);
   });
 }
 
