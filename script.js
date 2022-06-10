@@ -28,6 +28,9 @@ window.onload = () => {
   isClicking = 0;
   isGridded = 0;
 
+  sizeSlider.value = DEFAULT_SIZE;
+  sizeText.textContent = `${DEFAULT_SIZE}\u00d7${DEFAULT_SIZE}`;
+
   populateGrid(DEFAULT_SIZE);
   toggleGrid();
 };
@@ -240,6 +243,20 @@ function unregisterPixels(pixels) {
     pixel.removeEventListener("mouseover", drawPixel);
   });
 }
+
+sizeSlider.addEventListener("input", (e) => {
+  sizeText.textContent = `${e.target.value}\u00d7${e.target.value}`;
+});
+
+sizeSlider.addEventListener("change", (e) => {
+  if (!confirm("Are you sure you want to change the size of the grid?")) {
+    sizeSlider.value = currentSize;
+    sizeText.textContent = `${currentSize}\u00d7${currentSize}`;
+    return;
+  }
+  depopulateGrid();
+  populateGrid(e.target.value);
+});
 ////////////////////////////////////////////////////////
 // const grid = document.querySelector(".grid");
 // const colorElement = document.querySelector(".color");
