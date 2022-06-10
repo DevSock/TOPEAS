@@ -213,8 +213,13 @@ optionsHandle.addEventListener("mouseover", expandBar);
 main.addEventListener("mouseover", shrinkBar);
 optionsBarPin.addEventListener("click", pinBar);
 
-document.addEventListener("mousedown", () => isClicking++);
-document.addEventListener("mouseup", () => isClicking--);
+document.addEventListener("mousedown", (e) => {
+  if (e.button !== 0) return;
+  isClicking++;
+});
+document.addEventListener("mouseup", (e) => {
+  if (isClicking) isClicking--;
+});
 
 drawButtons.forEach((button) => {
   button.addEventListener("click", (e) => {
