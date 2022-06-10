@@ -4,7 +4,7 @@
 
 <font size="5"><b><a href="https://trello.com/b/Rgb7qgg7/topeas">Public Trello Board</a></b></font>
 
-<img src="EtchASketch_Gecko.png" alt="Gecko pixel art" width="800"/>
+<img src="READMESnapshot.png" alt="Heart Pixel Art" width="800"/>
 
 <font size="5"><b>QuickStart >></b></font>
 
