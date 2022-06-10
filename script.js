@@ -27,6 +27,8 @@ window.onload = () => {
 
 function populateGrid(size) {
   grid.innerHTML = "";
+  grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+  grid.style.gridTemplateRows = `repeat(${size}, 1fr)`;
   for (let i = 0; i < size ** 2; i++) {
     const pixel = document.createElement("div");
     grid.appendChild(pixel);
