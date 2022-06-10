@@ -247,6 +247,16 @@ main section {
   margin: 5px;
   user-select: none;
 }
+
+#grid div {
+  transition: 0.2s;
+}
+
+#grid div:hover {
+  background-color: hsl(206, 10%, 48%);
+  border: 2px solid hsl(203, 25%, 44%);
+  box-shadow: inset -1px 0px 4px -2px #000;
+}
 /* ############################# */
 /* ############################# */
 
