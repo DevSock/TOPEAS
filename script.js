@@ -18,7 +18,14 @@ const grid = document.getElementById("grid");
 
 const DEFAULT_TOOL = "pen";
 const DEFAULT_SIZE = 16;
-let isExpanded, isPinned, currentTool, isClicking, isGridded, currentSize;
+let isExpanded,
+  isPinned,
+  currentTool,
+  isClicking,
+  isGridded,
+  currentSize,
+  mostRecentPixel,
+  origPixelColor;
 
 window.onload = () => {
   currentTool = DEFAULT_TOOL;
@@ -27,6 +34,8 @@ window.onload = () => {
   isPinned = 0;
   isClicking = 0;
   isGridded = 0;
+  origPixelColor = "";
+  mostRecentPixel = null;
 
   sizeSlider.value = DEFAULT_SIZE;
   sizeText.textContent = `${DEFAULT_SIZE}\u00d7${DEFAULT_SIZE}`;
@@ -86,9 +95,13 @@ function pinBar() {
 //////////////////////////////////////////////////////////////////////////////
 
 function drawPixel(e) {
-  if (!isClicking) return;
   const pixel = e.target ? e.target : e;
+  if (!isClicking) {
+    colorOnHover(pixel);
+    return;
+  }
   if (currentTool !== "shade") pixel.style.filter = "";
+  mostRecentPixel = pixel;
 
   switch (currentTool) {
     case "pen":
@@ -239,7 +252,8 @@ gridButtons.forEach((button) => {
 
 function registerPixel(pixel) {
   pixel.addEventListener("mousedown", forceDraw);
-  pixel.addEventListener("mouseover", drawPixel);
+  pixel.addEventListener("mouseenter", drawPixel);
+  pixel.addEventListener("mouseout", restoreColor);
 }
 
 function unregisterPixels(pixels) {
@@ -247,6 +261,17 @@ function unregisterPixels(pixels) {
     pixel.removeEventListener("mousedown", forceDraw);
     pixel.removeEventListener("mouseover", drawPixel);
   });
+}
+
+function colorOnHover(pixel) {
+  origPixelColor = pixel.style.backgroundColor;
+  pixel.style.backgroundColor = color.value;
+}
+
+function restoreColor(e) {
+  if (isClicking) return;
+  if (e.target === mostRecentPixel) return;
+  e.target.style.backgroundColor = origPixelColor;
 }
 
 sizeSlider.addEventListener("input", (e) => {
