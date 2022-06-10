@@ -26,12 +26,14 @@ window.onload = () => {
   isExpanded = 0;
   isPinned = 0;
   isClicking = 0;
-  isGridded = 1;
+  isGridded = 0;
+
   populateGrid(DEFAULT_SIZE);
+  toggleGrid();
 };
 
 function populateGrid(size) {
-  unregisterPixels(grid.childNodes);
+  currentSize = size;
   grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
   grid.style.gridTemplateRows = `repeat(${size}, 1fr)`;
   for (let i = 0; i < size ** 2; i++) {
@@ -40,6 +42,11 @@ function populateGrid(size) {
     registerPixel(pixel);
     grid.appendChild(pixel);
   }
+}
+
+function depopulateGrid() {
+  unregisterPixels(grid.childNodes);
+  while (grid.firstChild) grid.removeChild(grid.firstChild);
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -141,8 +148,9 @@ function modifyGrid(target) {
     case "fill":
       fillGrid();
       break;
-    case "grid":
-      toggleGrid(target);
+    case "show grid": //This is called fall-through. Equivalent to || operation.
+    case "hide grid":
+      toggleGrid();
       break;
     case "reset":
       resetGrid();
@@ -168,17 +176,19 @@ function fillGrid() {
   });
 }
 
-function toggleGrid(target) {
+function toggleGrid() {
   if (isGridded) {
     grid.childNodes.forEach((pixel) => {
       pixel.classList.remove("shade-bordered");
-      target.classList.remove("active-button");
+      toggleGridBtn.classList.remove("active-button");
+      toggleGridBtn.textContent = "Show Grid";
     });
     isGridded--;
   } else {
     grid.childNodes.forEach((pixel) => {
       pixel.classList.add("shade-bordered");
-      target.classList.add("active-button");
+      toggleGridBtn.classList.add("active-button");
+      toggleGridBtn.textContent = "Hide Grid";
     });
     isGridded++;
   }
@@ -189,8 +199,7 @@ function resetGrid() {
 
   sizeSlider.value = DEFAULT_SIZE;
   sizeText.textContent = `${DEFAULT_SIZE}\u00d7${DEFAULT_SIZE}`;
-  gridButtons.forEach((button) => button.classList.remove("active-button"));
-  if (isGridded) isGridded--;
+  depopulateGrid();
   populateGrid(DEFAULT_SIZE);
 }
 
@@ -226,13 +235,10 @@ function registerPixel(pixel) {
 }
 
 function unregisterPixels(pixels) {
-  console.log(pixels);
   pixels.forEach((pixel) => {
     pixel.removeEventListener("mousedown", forceDraw);
     pixel.removeEventListener("mouseover", drawPixel);
-    grid.removeChild(pixel);
   });
-  console.log(`Total pixel count: ${pixels.length}`);
 }
 ////////////////////////////////////////////////////////
 // const grid = document.querySelector(".grid");
