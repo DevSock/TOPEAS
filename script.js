@@ -256,6 +256,7 @@ function unregisterPixels(pixels) {
   pixels.forEach((pixel) => {
     pixel.removeEventListener("mousedown", forceDraw);
     pixel.removeEventListener("mouseover", drawPixel);
+    pixel.removeEventListener("mouseout", restoreColor);
   });
 }
 
