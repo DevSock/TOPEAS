@@ -18,26 +18,18 @@ const grid = document.getElementById("grid");
 
 const DEFAULT_TOOL = "pen";
 const DEFAULT_SIZE = 16;
-let isExpanded,
-  isPinned,
-  currentTool,
-  isClicking,
-  isGridded,
-  currentSize,
-  mostRecentPixel,
-  origPixelColor;
+let currentTool = DEFAULT_TOOL;
+let currentSize = DEFAULT_SIZE;
+let isExpanded = 0;
+let isPinned = 0;
+let isClicking = 0;
+let isGridded = 0;
+let origPixelColor = "";
+let mostRecentPixel = null;
 
+//Set up the grid and the size slider.
 window.onload = () => {
-  currentTool = DEFAULT_TOOL;
-  currentSize = DEFAULT_SIZE;
-  isExpanded = 0;
-  isPinned = 0;
-  isClicking = 0;
-  isGridded = 0;
-  origPixelColor = "";
-  mostRecentPixel = null;
-
-  sizeSlider.value = DEFAULT_SIZE;
+  sizeSlider.value = DEFAULT_SIZE; //Set this avoid the slider being positioned by a cached value from a previous visit.
   sizeText.textContent = `${DEFAULT_SIZE}\u00d7${DEFAULT_SIZE}`;
 
   populateGrid(DEFAULT_SIZE);
@@ -48,6 +40,7 @@ function populateGrid(size) {
   currentSize = size;
   grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
   grid.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+
   for (let i = 0; i < size ** 2; i++) {
     const pixel = document.createElement("div");
     if (isGridded) pixel.classList.add("shade-bordered");
@@ -82,12 +75,14 @@ function shrinkBar() {
 
 function pinBar() {
   if (!optionsBar.classList.contains("expanded")) return;
+
   if (isPinned) {
-    isPinned = false;
+    isPinned = 0;
     optionsBarPinPath.style.fill = "red";
     return;
   }
-  isPinned = true;
+
+  isPinned = 1;
   optionsBarPinPath.style.fill = "limegreen";
 }
 
@@ -95,7 +90,8 @@ function pinBar() {
 //////////////////////////////////////////////////////////////////////////////
 
 function drawPixel(e) {
-  const pixel = e.target ? e.target : e;
+  const pixel = e.target ? e.target : e; //If e has a target, get the target. Otherwise, assume it is a pixel.
+
   if (!isClicking) {
     colorOnHover(pixel);
     return;
@@ -147,10 +143,10 @@ function useShade(pixel) {
   if (shade == "") {
     pixel.style.filter = "brightness(0.9)";
     return;
-  } else {
-    const newShade = +shade.replace(/\D/g, "") - 1;
-    pixel.style.filter = `brightness(0.${newShade})`;
   }
+
+  const newShade = +shade.replace(/\D/g, "") - 1; //Remove all non-numeric characters.
+  pixel.style.filter = `brightness(0.${newShade})`;
 }
 
 //////////////////////////////////////////////////////////////////////////////
