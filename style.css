@@ -254,7 +254,7 @@ main section {
 
 #grid div:hover {
   background-color: hsl(206, 10%, 48%);
-  border: 2px solid hsl(203, 25%, 44%);
+  border: 1px solid #000;
   box-shadow: inset -1px 0px 4px -2px #000;
 }
 /* ############################# */
