@@ -91,13 +91,8 @@ function pinBar() {
 
 function drawPixel(e) {
   const pixel = e.target ? e.target : e; //If e has a target, get the target. Otherwise, assume it is a pixel.
-
-  if (!isClicking) {
-    colorOnHover(pixel);
-    return;
-  }
+  if (!isClicking) return colorOnHover(pixel);
   if (currentTool !== "shade") pixel.style.filter = "";
-  mostRecentPixel = pixel;
 
   switch (currentTool) {
     case "pen":
@@ -113,10 +108,13 @@ function drawPixel(e) {
       useShade(pixel);
       break;
   }
+
+  mostRecentPixel = pixel;
 }
 
 function forceDraw(pixel) {
   if (!isClicking) isClicking++;
+
   drawPixel(pixel);
   isClicking--;
 }
@@ -126,9 +124,10 @@ function usePen(pixel) {
 }
 
 function useRainbow(pixel) {
-  pixel.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, ${
-    Math.random() * 40 + 30
-  }%)`;
+  let h = Math.random() * 360;
+  let s = Math.random() * 100;
+  let l = Math.random() * 40 + 20;
+  pixel.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
 }
 
 function useErase(pixel) {
@@ -139,14 +138,10 @@ function useShade(pixel) {
   const shade = pixel.style.filter;
   if (pixel.style.backgroundColor === "") return;
   if (shade === "brightness(0)") return;
+  if (shade == "") pixel.style.filter = "brightness(90%)";
 
-  if (shade == "") {
-    pixel.style.filter = "brightness(0.9)";
-    return;
-  }
-
-  const newShade = +shade.replace(/\D/g, "") - 1; //Remove all non-numeric characters.
-  pixel.style.filter = `brightness(0.${newShade})`;
+  const newShade = +shade.replace(/\D/g, "") - 10; //Remove all non-numeric characters.
+  pixel.style.filter = `brightness(${newShade}%)`;
 }
 
 //////////////////////////////////////////////////////////////////////////////
