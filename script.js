@@ -8,6 +8,11 @@ const sizeText = document.getElementById("size-text");
 const drawButtons = document.querySelectorAll("#draw-tools .option-button");
 const gridButtons = document.querySelectorAll("#grid-tools .option-button");
 
+const clearGridBtn = document.getElementById("clear-grid");
+const fillGridBtn = document.getElementById("fill-grid");
+const toggleGridBtn = document.getElementById("toggle-grid");
+const resetGridBtn = document.getElementById("reset-grid");
+
 const main = document.getElementById("main");
 const grid = document.getElementById("grid");
 
@@ -16,24 +21,25 @@ const DEFAULT_SIZE = 16;
 let isExpanded, isPinned, currentTool, isClicking, isGridded, currentSize;
 
 window.onload = () => {
-  populateGrid(DEFAULT_SIZE);
   currentTool = DEFAULT_TOOL;
   currentSize = DEFAULT_SIZE;
   isExpanded = 0;
   isPinned = 0;
   isClicking = 0;
-  isGridded = 0;
+  isGridded = 1;
+  populateGrid(DEFAULT_SIZE);
 };
 
 function populateGrid(size) {
-  grid.innerHTML = "";
+  unregisterPixels(grid.childNodes);
   grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
   grid.style.gridTemplateRows = `repeat(${size}, 1fr)`;
   for (let i = 0; i < size ** 2; i++) {
     const pixel = document.createElement("div");
+    if (isGridded) pixel.classList.add("shade-bordered");
+    registerPixel(pixel);
     grid.appendChild(pixel);
   }
-  registerPixels(grid.childNodes);
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -69,9 +75,9 @@ function pinBar() {
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 
-function drawPixel(pixel, force) {
-  if (!isClicking && !force) return;
-
+function drawPixel(e) {
+  if (!isClicking) return;
+  const pixel = e.target ? e.target : e;
   if (currentTool !== "shade") pixel.style.filter = "";
 
   switch (currentTool) {
@@ -88,6 +94,12 @@ function drawPixel(pixel, force) {
       useShade(pixel);
       break;
   }
+}
+
+function forceDraw(pixel) {
+  if (!isClicking) isClicking++;
+  drawPixel(pixel);
+  isClicking--;
 }
 
 function usePen(pixel) {
@@ -152,7 +164,7 @@ function fillGrid() {
 
   grid.childNodes.forEach((pixel) => {
     if (pixel.style.backgroundColor !== "" && currentTool !== "shade") return;
-    drawPixel(pixel, true);
+    forceDraw(pixel);
   });
 }
 
@@ -175,11 +187,11 @@ function toggleGrid(target) {
 function resetGrid() {
   if (!confirm("Are you sure you want to reset the grid?")) return;
 
-  sizeSlider.value = 16;
-  sizeText.textContent = `16\u00d716`;
+  sizeSlider.value = DEFAULT_SIZE;
+  sizeText.textContent = `${DEFAULT_SIZE}\u00d7${DEFAULT_SIZE}`;
   gridButtons.forEach((button) => button.classList.remove("active-button"));
   if (isGridded) isGridded--;
-  populateGrid(16);
+  populateGrid(DEFAULT_SIZE);
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -189,8 +201,8 @@ optionsHandle.addEventListener("mouseover", expandBar);
 main.addEventListener("mouseover", shrinkBar);
 optionsBarPin.addEventListener("click", pinBar);
 
-document.addEventListener("mousedown", () => (isClicking = true));
-document.addEventListener("mouseup", () => (isClicking = false));
+document.addEventListener("mousedown", () => isClicking++);
+document.addEventListener("mouseup", () => isClicking--);
 
 drawButtons.forEach((button) => {
   button.addEventListener("click", (e) => {
@@ -208,15 +220,19 @@ gridButtons.forEach((button) => {
   });
 });
 
-function registerPixels(pixels) {
+function registerPixel(pixel) {
+  pixel.addEventListener("mousedown", forceDraw);
+  pixel.addEventListener("mouseover", drawPixel);
+}
+
+function unregisterPixels(pixels) {
+  console.log(pixels);
   pixels.forEach((pixel) => {
-    pixel.addEventListener("mousedown", () => {
-      drawPixel(pixel, true);
-    });
-    pixel.addEventListener("mouseover", () => {
-      drawPixel(pixel, false);
-    });
+    pixel.removeEventListener("mousedown", forceDraw);
+    pixel.removeEventListener("mouseover", drawPixel);
+    grid.removeChild(pixel);
   });
+  console.log(`Total pixel count: ${pixels.length}`);
 }
 ////////////////////////////////////////////////////////
 // const grid = document.querySelector(".grid");
