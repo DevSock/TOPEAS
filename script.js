@@ -132,6 +132,7 @@ function useRainbow(pixel) {
 
 function useErase(pixel) {
   pixel.style.backgroundColor = "";
+  pixel.style.filter = "";
 }
 
 function useShade(pixel) {
