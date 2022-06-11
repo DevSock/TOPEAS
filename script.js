@@ -91,7 +91,7 @@ function pinBar() {
 
 function drawPixel(e) {
   const pixel = e.target ? e.target : e; //If e has a target, get the target. Otherwise, assume it is a pixel.
-  if (!isClicking) return colorOnHover(pixel);
+  if (!isClicking) return;
   if (currentTool !== "shade") pixel.style.filter = "";
 
   switch (currentTool) {
@@ -243,27 +243,27 @@ gridButtons.forEach((button) => {
 function registerPixel(pixel) {
   pixel.addEventListener("mousedown", forceDraw);
   pixel.addEventListener("mouseenter", drawPixel);
-  pixel.addEventListener("mouseout", restoreColor);
+  // pixel.addEventListener("mouseout", restoreColor);
 }
 
 function unregisterPixels(pixels) {
   pixels.forEach((pixel) => {
     pixel.removeEventListener("mousedown", forceDraw);
     pixel.removeEventListener("mouseover", drawPixel);
-    pixel.removeEventListener("mouseout", restoreColor);
+    // pixel.removeEventListener("mouseout", restoreColor);
   });
 }
 
-function colorOnHover(pixel) {
-  origPixelColor = pixel.style.backgroundColor;
-  pixel.style.backgroundColor = color.value;
-}
+// function colorOnHover(pixel) {
+//   origPixelColor = pixel.style.backgroundColor;
+//   pixel.style.backgroundColor = color.value;
+// }
 
-function restoreColor(e) {
-  if (isClicking) return;
-  if (e.target === mostRecentPixel) return;
-  e.target.style.backgroundColor = origPixelColor;
-}
+// function restoreColor(e) {
+//   if (isClicking) return;
+//   if (e.target === mostRecentPixel) return;
+//   e.target.style.backgroundColor = origPixelColor;
+// }
 
 sizeSlider.addEventListener("input", (e) => {
   sizeText.textContent = `${e.target.value}\u00d7${e.target.value}`;
