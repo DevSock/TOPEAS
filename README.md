@@ -24,6 +24,6 @@
 <font size="5"><b>Grid Actions >></b></font>
 
 - <font size ="3"><b>Clear</b></font>: <font size ="3">Remove the color from all pixels.</font>
-- <font size ="3"><b>Fill</b></font>: <font size ="3">Fill all uncolored pixels with the selected color</font>
-- <font size ="3"><b>Grid</b></font>: <font size ="3">Show / Hide the pixel outlines</font>
-- <font size ="3"><b>Reset</b></font>: <font size ="3">Reset the grid to it's default state of 16x16 uncolored pixels with no grid</font>
+- <font size ="3"><b>Fill</b></font>: <font size ="3">Style all untouched pixels using the currently selected tool (Shade effects all pixels)</font>
+- <font size ="3"><b>Grid</b></font>: <font size ="3">Show / Hide the pixel gridding</font>
+- <font size ="3"><b>Reset</b></font>: <font size ="3">Reset the grid to it's default state of 16x16 uncolored pixels</font>
